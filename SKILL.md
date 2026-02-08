@@ -147,12 +147,31 @@
 
 ### 步骤 1: 内容输入
 
-用户提供海报内容，包括：
+**重要：必须使用 AskUserQuestion 工具收集用户信息**
+
+不要用文本直接提问，必须使用 AskUserQuestion 工具交互式收集以下信息：
 - 标题/主题
 - 副标题/标语
 - 关键信息点 (课程安排、活动亮点等)
 - CTA文本
 - 特殊要求
+
+示例：
+```javascript
+AskUserQuestion({
+  questions: [
+    {
+      question: "请选择海报类型",
+      header: "海报类型",
+      options: [
+        { label: "课程宣传", description: "新课推广、训练营招生" },
+        { label: "活动宣传", description: "线下活动、直播预告" }
+      ],
+      multiSelect: false
+    }
+  ]
+})
+```
 
 ### 步骤 2: 分析与建议
 
