@@ -205,6 +205,46 @@ bxz-poster-gen/
 - 检查网络连接
 - 确认未超过 API 速率限制
 
+### Git 推送问题
+
+#### HTTP2 协议错误
+
+**错误**: `fatal: unable to access 'https://github.com/...': Error in the HTTP2 framing layer`
+
+**解决方案 1**: 使用 HTTP/1.1
+```bash
+git -c http.version=HTTP/1.1 push
+```
+
+**解决方案 2**: 使用带 Token 的 URL
+```bash
+git remote set-url origin https://<token>@github.com/username/repo.git
+git push
+```
+
+**解决方案 3**: 配置全局 HTTP 版本
+```bash
+git config --global http.version HTTP/1.1
+```
+
+#### 连接超时
+
+**错误**: `fatal: unable to access 'https://github.com/...': Couldn't connect to server`
+
+**解决方案**: 检查网络或尝试使用 Token URL 方式（见上）
+
+#### 凭据存储
+
+macOS 用户可以使用钥匙串存储 GitHub Token：
+```bash
+git credential-osxkeychain store <<EOF
+protocol=https
+host=github.com
+username=your-username
+password=your-pat-token
+EOF
+```
+
 ---
 
 ## 致谢
